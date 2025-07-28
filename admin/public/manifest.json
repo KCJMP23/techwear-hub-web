@@ -1,0 +1,21 @@
+{
+  "name": "Affiliate Template Admin",
+  "short_name": "Admin",
+  "description": "Admin dashboard for affiliate marketing template",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007AFF",
+  "icons": [
+    {
+      "src": "/next.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vercel.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+} 

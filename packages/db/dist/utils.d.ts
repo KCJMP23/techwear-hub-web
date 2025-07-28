@@ -1,0 +1,4664 @@
+import { PrismaClient, Prisma } from '@prisma/client';
+declare const prisma: PrismaClient<Prisma.PrismaClientOptions, never, import("@prisma/client/runtime/library").DefaultArgs>;
+export declare const contentService: {
+    create(data: Prisma.ContentCreateInput): Promise<{
+        status: string;
+        data: Prisma.JsonValue;
+        id: string;
+        title: string;
+        slug: string;
+        contentTypeId: number;
+        createdBy: string | null;
+        updatedBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        version: number | null;
+        scheduledPublishAt: Date | null;
+    }>;
+    findById(id: string): Promise<({
+        contentType: {
+            name: string;
+            id: number;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            schema: Prisma.JsonValue | null;
+        };
+        categories: ({
+            category: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                parentId: number | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        tags: ({
+            tag: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+        versions: {
+            data: Prisma.JsonValue;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            version: number;
+            contentId: string;
+        }[];
+        siteContent: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        status: string;
+        data: Prisma.JsonValue;
+        id: string;
+        title: string;
+        slug: string;
+        contentTypeId: number;
+        createdBy: string | null;
+        updatedBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        version: number | null;
+        scheduledPublishAt: Date | null;
+    }) | null>;
+    findBySlug(slug: string): Promise<({
+        contentType: {
+            name: string;
+            id: number;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            schema: Prisma.JsonValue | null;
+        };
+        categories: ({
+            category: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                parentId: number | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        tags: ({
+            tag: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+        versions: {
+            data: Prisma.JsonValue;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            version: number;
+            contentId: string;
+        }[];
+        siteContent: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        status: string;
+        data: Prisma.JsonValue;
+        id: string;
+        title: string;
+        slug: string;
+        contentTypeId: number;
+        createdBy: string | null;
+        updatedBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        version: number | null;
+        scheduledPublishAt: Date | null;
+    }) | null>;
+    findAll(options?: {
+        status?: string;
+        contentTypeId?: number;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        contentType: {
+            name: string;
+            id: number;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            schema: Prisma.JsonValue | null;
+        };
+        categories: ({
+            category: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                parentId: number | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        tags: ({
+            tag: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+        versions: {
+            data: Prisma.JsonValue;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            version: number;
+            contentId: string;
+        }[];
+        siteContent: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        status: string;
+        data: Prisma.JsonValue;
+        id: string;
+        title: string;
+        slug: string;
+        contentTypeId: number;
+        createdBy: string | null;
+        updatedBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        version: number | null;
+        scheduledPublishAt: Date | null;
+    })[]>;
+    update(id: string, data: Prisma.ContentUpdateInput): Promise<{
+        contentType: {
+            name: string;
+            id: number;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            schema: Prisma.JsonValue | null;
+        };
+        categories: ({
+            category: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                parentId: number | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        tags: ({
+            tag: {
+                name: string;
+                id: number;
+                slug: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+        versions: {
+            data: Prisma.JsonValue;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            version: number;
+            contentId: string;
+        }[];
+        siteContent: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        status: string;
+        data: Prisma.JsonValue;
+        id: string;
+        title: string;
+        slug: string;
+        contentTypeId: number;
+        createdBy: string | null;
+        updatedBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        version: number | null;
+        scheduledPublishAt: Date | null;
+    }>;
+    delete(id: string): Promise<{
+        status: string;
+        data: Prisma.JsonValue;
+        id: string;
+        title: string;
+        slug: string;
+        contentTypeId: number;
+        createdBy: string | null;
+        updatedBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        version: number | null;
+        scheduledPublishAt: Date | null;
+    }>;
+    addCategory(contentId: string, categoryId: number): Promise<{
+        category: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        };
+    } & {
+        contentId: string;
+        categoryId: number;
+    }>;
+    removeCategory(contentId: string, categoryId: number): Promise<{
+        contentId: string;
+        categoryId: number;
+    }>;
+    addTag(contentId: string, tagId: number): Promise<{
+        tag: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+        };
+    } & {
+        contentId: string;
+        tagId: number;
+    }>;
+    removeTag(contentId: string, tagId: number): Promise<{
+        contentId: string;
+        tagId: number;
+    }>;
+};
+export declare const siteService: {
+    create(data: Prisma.SiteCreateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        domain: string;
+        logoUrl: string | null;
+        primaryColor: string | null;
+        secondaryColor: string | null;
+        nicheType: string;
+        customNicheId: string | null;
+        nicheKeywords: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        siteTitle: string | null;
+        siteDescription: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        aboutTitle: string | null;
+        aboutDescription: string | null;
+        contactEmail: string | null;
+        metaTitle: string | null;
+        metaDescription: string | null;
+        metaKeywords: string | null;
+        featuredPostsTitle: string | null;
+        featuredPostsSubtitle: string | null;
+        featuredProductsTitle: string | null;
+        featuredProductsSubtitle: string | null;
+        newsletterTitle: string | null;
+        newsletterSubtitle: string | null;
+        autoBlogEnabled: boolean;
+        autoBlogFrequency: string | null;
+        autoBlogPostTypes: Prisma.JsonValue | null;
+        autoBlogCategories: Prisma.JsonValue | null;
+        footerText: string | null;
+        socialLinks: Prisma.JsonValue | null;
+    }>;
+    findById(id: string): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        domain: string;
+        logoUrl: string | null;
+        primaryColor: string | null;
+        secondaryColor: string | null;
+        nicheType: string;
+        customNicheId: string | null;
+        nicheKeywords: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        siteTitle: string | null;
+        siteDescription: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        aboutTitle: string | null;
+        aboutDescription: string | null;
+        contactEmail: string | null;
+        metaTitle: string | null;
+        metaDescription: string | null;
+        metaKeywords: string | null;
+        featuredPostsTitle: string | null;
+        featuredPostsSubtitle: string | null;
+        featuredProductsTitle: string | null;
+        featuredProductsSubtitle: string | null;
+        newsletterTitle: string | null;
+        newsletterSubtitle: string | null;
+        autoBlogEnabled: boolean;
+        autoBlogFrequency: string | null;
+        autoBlogPostTypes: Prisma.JsonValue | null;
+        autoBlogCategories: Prisma.JsonValue | null;
+        footerText: string | null;
+        socialLinks: Prisma.JsonValue | null;
+    }) | null>;
+    findByDomain(domain: string): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        domain: string;
+        logoUrl: string | null;
+        primaryColor: string | null;
+        secondaryColor: string | null;
+        nicheType: string;
+        customNicheId: string | null;
+        nicheKeywords: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        siteTitle: string | null;
+        siteDescription: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        aboutTitle: string | null;
+        aboutDescription: string | null;
+        contactEmail: string | null;
+        metaTitle: string | null;
+        metaDescription: string | null;
+        metaKeywords: string | null;
+        featuredPostsTitle: string | null;
+        featuredPostsSubtitle: string | null;
+        featuredProductsTitle: string | null;
+        featuredProductsSubtitle: string | null;
+        newsletterTitle: string | null;
+        newsletterSubtitle: string | null;
+        autoBlogEnabled: boolean;
+        autoBlogFrequency: string | null;
+        autoBlogPostTypes: Prisma.JsonValue | null;
+        autoBlogCategories: Prisma.JsonValue | null;
+        footerText: string | null;
+        socialLinks: Prisma.JsonValue | null;
+    }) | null>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        domain: string;
+        logoUrl: string | null;
+        primaryColor: string | null;
+        secondaryColor: string | null;
+        nicheType: string;
+        customNicheId: string | null;
+        nicheKeywords: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        siteTitle: string | null;
+        siteDescription: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        aboutTitle: string | null;
+        aboutDescription: string | null;
+        contactEmail: string | null;
+        metaTitle: string | null;
+        metaDescription: string | null;
+        metaKeywords: string | null;
+        featuredPostsTitle: string | null;
+        featuredPostsSubtitle: string | null;
+        featuredProductsTitle: string | null;
+        featuredProductsSubtitle: string | null;
+        newsletterTitle: string | null;
+        newsletterSubtitle: string | null;
+        autoBlogEnabled: boolean;
+        autoBlogFrequency: string | null;
+        autoBlogPostTypes: Prisma.JsonValue | null;
+        autoBlogCategories: Prisma.JsonValue | null;
+        footerText: string | null;
+        socialLinks: Prisma.JsonValue | null;
+    })[]>;
+    update(id: string, data: Prisma.SiteUpdateInput): Promise<{
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+        })[];
+        media: ({
+            mediaAsset: {
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                url: string;
+                filename: string;
+                originalName: string;
+                mimeType: string;
+                size: number;
+                altText: string | null;
+                metadata: Prisma.JsonValue | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        domain: string;
+        logoUrl: string | null;
+        primaryColor: string | null;
+        secondaryColor: string | null;
+        nicheType: string;
+        customNicheId: string | null;
+        nicheKeywords: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        siteTitle: string | null;
+        siteDescription: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        aboutTitle: string | null;
+        aboutDescription: string | null;
+        contactEmail: string | null;
+        metaTitle: string | null;
+        metaDescription: string | null;
+        metaKeywords: string | null;
+        featuredPostsTitle: string | null;
+        featuredPostsSubtitle: string | null;
+        featuredProductsTitle: string | null;
+        featuredProductsSubtitle: string | null;
+        newsletterTitle: string | null;
+        newsletterSubtitle: string | null;
+        autoBlogEnabled: boolean;
+        autoBlogFrequency: string | null;
+        autoBlogPostTypes: Prisma.JsonValue | null;
+        autoBlogCategories: Prisma.JsonValue | null;
+        footerText: string | null;
+        socialLinks: Prisma.JsonValue | null;
+    }>;
+    delete(id: string): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        domain: string;
+        logoUrl: string | null;
+        primaryColor: string | null;
+        secondaryColor: string | null;
+        nicheType: string;
+        customNicheId: string | null;
+        nicheKeywords: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        siteTitle: string | null;
+        siteDescription: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        aboutTitle: string | null;
+        aboutDescription: string | null;
+        contactEmail: string | null;
+        metaTitle: string | null;
+        metaDescription: string | null;
+        metaKeywords: string | null;
+        featuredPostsTitle: string | null;
+        featuredPostsSubtitle: string | null;
+        featuredProductsTitle: string | null;
+        featuredProductsSubtitle: string | null;
+        newsletterTitle: string | null;
+        newsletterSubtitle: string | null;
+        autoBlogEnabled: boolean;
+        autoBlogFrequency: string | null;
+        autoBlogPostTypes: Prisma.JsonValue | null;
+        autoBlogCategories: Prisma.JsonValue | null;
+        footerText: string | null;
+        socialLinks: Prisma.JsonValue | null;
+    }>;
+};
+export declare const affiliateLinkService: {
+    create(data: Prisma.AffiliateLinkCreateInput): Promise<{
+        status: string;
+        name: string;
+        id: string;
+        createdBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        siteId: string;
+        originalUrl: string;
+        affiliateUrl: string;
+        productId: string | null;
+        merchantId: string | null;
+        displayText: string | null;
+        trackingId: string | null;
+        commissionInfo: Prisma.JsonValue | null;
+        expirationDate: Date | null;
+    }>;
+    findById(id: string): Promise<({
+        merchant: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            logoUrl: string | null;
+            website: string | null;
+        } | null;
+        product: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            manufacturer: string | null;
+            basePrice: Prisma.Decimal;
+            mainImageUrl: string | null;
+            specifications: Prisma.JsonValue | null;
+        } | null;
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        linkClicks: {
+            id: string;
+            affiliateLinkId: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            referrer: string | null;
+            clickedAt: Date | null;
+            conversionStatus: string | null;
+            conversionValue: Prisma.Decimal | null;
+        }[];
+    } & {
+        status: string;
+        name: string;
+        id: string;
+        createdBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        siteId: string;
+        originalUrl: string;
+        affiliateUrl: string;
+        productId: string | null;
+        merchantId: string | null;
+        displayText: string | null;
+        trackingId: string | null;
+        commissionInfo: Prisma.JsonValue | null;
+        expirationDate: Date | null;
+    }) | null>;
+    findBySite(siteId: string, options?: {
+        status?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        merchant: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            logoUrl: string | null;
+            website: string | null;
+        } | null;
+        product: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            manufacturer: string | null;
+            basePrice: Prisma.Decimal;
+            mainImageUrl: string | null;
+            specifications: Prisma.JsonValue | null;
+        } | null;
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        linkClicks: {
+            id: string;
+            affiliateLinkId: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            referrer: string | null;
+            clickedAt: Date | null;
+            conversionStatus: string | null;
+            conversionValue: Prisma.Decimal | null;
+        }[];
+    } & {
+        status: string;
+        name: string;
+        id: string;
+        createdBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        siteId: string;
+        originalUrl: string;
+        affiliateUrl: string;
+        productId: string | null;
+        merchantId: string | null;
+        displayText: string | null;
+        trackingId: string | null;
+        commissionInfo: Prisma.JsonValue | null;
+        expirationDate: Date | null;
+    })[]>;
+    findAll(options?: {
+        status?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        merchant: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            logoUrl: string | null;
+            website: string | null;
+        } | null;
+        product: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            manufacturer: string | null;
+            basePrice: Prisma.Decimal;
+            mainImageUrl: string | null;
+            specifications: Prisma.JsonValue | null;
+        } | null;
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        linkClicks: {
+            id: string;
+            affiliateLinkId: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            referrer: string | null;
+            clickedAt: Date | null;
+            conversionStatus: string | null;
+            conversionValue: Prisma.Decimal | null;
+        }[];
+    } & {
+        status: string;
+        name: string;
+        id: string;
+        createdBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        siteId: string;
+        originalUrl: string;
+        affiliateUrl: string;
+        productId: string | null;
+        merchantId: string | null;
+        displayText: string | null;
+        trackingId: string | null;
+        commissionInfo: Prisma.JsonValue | null;
+        expirationDate: Date | null;
+    })[]>;
+    update(id: string, data: Prisma.AffiliateLinkUpdateInput): Promise<{
+        merchant: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            logoUrl: string | null;
+            website: string | null;
+        } | null;
+        product: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            manufacturer: string | null;
+            basePrice: Prisma.Decimal;
+            mainImageUrl: string | null;
+            specifications: Prisma.JsonValue | null;
+        } | null;
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        linkClicks: {
+            id: string;
+            affiliateLinkId: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            referrer: string | null;
+            clickedAt: Date | null;
+            conversionStatus: string | null;
+            conversionValue: Prisma.Decimal | null;
+        }[];
+    } & {
+        status: string;
+        name: string;
+        id: string;
+        createdBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        siteId: string;
+        originalUrl: string;
+        affiliateUrl: string;
+        productId: string | null;
+        merchantId: string | null;
+        displayText: string | null;
+        trackingId: string | null;
+        commissionInfo: Prisma.JsonValue | null;
+        expirationDate: Date | null;
+    }>;
+    delete(id: string): Promise<{
+        status: string;
+        name: string;
+        id: string;
+        createdBy: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        siteId: string;
+        originalUrl: string;
+        affiliateUrl: string;
+        productId: string | null;
+        merchantId: string | null;
+        displayText: string | null;
+        trackingId: string | null;
+        commissionInfo: Prisma.JsonValue | null;
+        expirationDate: Date | null;
+    }>;
+    trackClick(data: Prisma.LinkClickCreateInput): Promise<{
+        id: string;
+        affiliateLinkId: string;
+        ipAddress: string | null;
+        userAgent: string | null;
+        referrer: string | null;
+        clickedAt: Date | null;
+        conversionStatus: string | null;
+        conversionValue: Prisma.Decimal | null;
+    }>;
+    getClickStats(affiliateLinkId: string): Promise<{
+        totalClicks: number;
+        uniqueClicks: number;
+        conversionRate: number;
+        clicks: {
+            id: string;
+            affiliateLinkId: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            referrer: string | null;
+            clickedAt: Date | null;
+            conversionStatus: string | null;
+            conversionValue: Prisma.Decimal | null;
+        }[];
+    }>;
+};
+export declare const productService: {
+    create(data: Prisma.ProductCreateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        manufacturer: string | null;
+        basePrice: Prisma.Decimal;
+        mainImageUrl: string | null;
+        specifications: Prisma.JsonValue | null;
+    }>;
+    findById(id: string): Promise<({
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        siteProducts: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        manufacturer: string | null;
+        basePrice: Prisma.Decimal;
+        mainImageUrl: string | null;
+        specifications: Prisma.JsonValue | null;
+    }) | null>;
+    findByManufacturer(manufacturer: string, options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        siteProducts: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        manufacturer: string | null;
+        basePrice: Prisma.Decimal;
+        mainImageUrl: string | null;
+        specifications: Prisma.JsonValue | null;
+    })[]>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        siteProducts: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        manufacturer: string | null;
+        basePrice: Prisma.Decimal;
+        mainImageUrl: string | null;
+        specifications: Prisma.JsonValue | null;
+    })[]>;
+    update(id: string, data: Prisma.ProductUpdateInput): Promise<{
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+        siteProducts: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        manufacturer: string | null;
+        basePrice: Prisma.Decimal;
+        mainImageUrl: string | null;
+        specifications: Prisma.JsonValue | null;
+    }>;
+    delete(id: string): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        manufacturer: string | null;
+        basePrice: Prisma.Decimal;
+        mainImageUrl: string | null;
+        specifications: Prisma.JsonValue | null;
+    }>;
+};
+export declare const analyticsService: {
+    getSiteAnalytics(siteId: string, dateRange?: {
+        start: Date;
+        end: Date;
+    }): Promise<{
+        totalClicks: number;
+        uniqueClicks: number;
+        conversions: number;
+        conversionRate: number;
+        totalRevenue: number;
+        clicks: ({
+            affiliateLink: {
+                product: {
+                    name: string;
+                    id: string;
+                    createdAt: Date | null;
+                    updatedAt: Date | null;
+                    description: string | null;
+                    manufacturer: string | null;
+                    basePrice: Prisma.Decimal;
+                    mainImageUrl: string | null;
+                    specifications: Prisma.JsonValue | null;
+                } | null;
+            } & {
+                status: string;
+                name: string;
+                id: string;
+                createdBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                siteId: string;
+                originalUrl: string;
+                affiliateUrl: string;
+                productId: string | null;
+                merchantId: string | null;
+                displayText: string | null;
+                trackingId: string | null;
+                commissionInfo: Prisma.JsonValue | null;
+                expirationDate: Date | null;
+            };
+        } & {
+            id: string;
+            affiliateLinkId: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            referrer: string | null;
+            clickedAt: Date | null;
+            conversionStatus: string | null;
+            conversionValue: Prisma.Decimal | null;
+        })[];
+    }>;
+    getTopProducts(siteId: string, limit?: number): Promise<{
+        product: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            manufacturer: string | null;
+            basePrice: Prisma.Decimal;
+            mainImageUrl: string | null;
+            specifications: Prisma.JsonValue | null;
+        } | null | undefined;
+        clicks: number;
+        revenue: number;
+    }[]>;
+    getClickHistory(affiliateLinkId: string, limit?: number): Promise<{
+        id: string;
+        affiliateLinkId: string;
+        ipAddress: string | null;
+        userAgent: string | null;
+        referrer: string | null;
+        clickedAt: Date | null;
+        conversionStatus: string | null;
+        conversionValue: Prisma.Decimal | null;
+    }[]>;
+};
+export declare const newsletterService: {
+    subscribe(data: Prisma.NewsletterSubscriberCreateInput): Promise<{
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        isActive: boolean;
+        source: string | null;
+        email: string;
+        firstName: string | null;
+        lastName: string | null;
+        subscribedAt: Date | null;
+        unsubscribedAt: Date | null;
+        preferences: Prisma.JsonValue | null;
+    }>;
+    unsubscribe(email: string): Promise<Prisma.BatchPayload>;
+    findSubscriber(email: string): Promise<{
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        isActive: boolean;
+        source: string | null;
+        email: string;
+        firstName: string | null;
+        lastName: string | null;
+        subscribedAt: Date | null;
+        unsubscribedAt: Date | null;
+        preferences: Prisma.JsonValue | null;
+    } | null>;
+    getAllSubscribers(options?: {
+        isActive?: boolean;
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        isActive: boolean;
+        source: string | null;
+        email: string;
+        firstName: string | null;
+        lastName: string | null;
+        subscribedAt: Date | null;
+        unsubscribedAt: Date | null;
+        preferences: Prisma.JsonValue | null;
+    }[]>;
+    createCampaign(data: Prisma.NewsletterCampaignCreateInput): Promise<{
+        status: string;
+        name: string;
+        content: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        subject: string;
+        sentAt: Date | null;
+        sentCount: number;
+        openCount: number;
+        clickCount: number;
+    }>;
+    findCampaign(id: string): Promise<{
+        status: string;
+        name: string;
+        content: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        subject: string;
+        sentAt: Date | null;
+        sentCount: number;
+        openCount: number;
+        clickCount: number;
+    } | null>;
+    updateCampaign(id: string, data: Prisma.NewsletterCampaignUpdateInput): Promise<{
+        status: string;
+        name: string;
+        content: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        subject: string;
+        sentAt: Date | null;
+        sentCount: number;
+        openCount: number;
+        clickCount: number;
+    }>;
+    getAllCampaigns(options?: {
+        status?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        status: string;
+        name: string;
+        content: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        subject: string;
+        sentAt: Date | null;
+        sentCount: number;
+        openCount: number;
+        clickCount: number;
+    }[]>;
+};
+export declare const categoryService: {
+    create(data: Prisma.CategoryCreateInput): Promise<{
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        parentId: number | null;
+    }>;
+    findById(id: number): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        parent: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        } | null;
+        children: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        parentId: number | null;
+    }) | null>;
+    findAll(options?: {
+        parentId?: number | null;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        parent: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        } | null;
+        children: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        parentId: number | null;
+    })[]>;
+    update(id: number, data: Prisma.CategoryUpdateInput): Promise<{
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            categoryId: number;
+        })[];
+        parent: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        } | null;
+        children: {
+            name: string;
+            id: number;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            parentId: number | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        parentId: number | null;
+    }>;
+    delete(id: number): Promise<{
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        parentId: number | null;
+    }>;
+};
+export declare const tagService: {
+    create(data: Prisma.TagCreateInput): Promise<{
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+    }>;
+    findById(id: number): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+    } & {
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+    }) | null>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+    } & {
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+    })[]>;
+    update(id: number, data: Prisma.TagUpdateInput): Promise<{
+        content: ({
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            tagId: number;
+        })[];
+    } & {
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+    }>;
+    delete(id: number): Promise<{
+        name: string;
+        id: number;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+    }>;
+};
+export declare const mediaService: {
+    create(data: Prisma.MediaAssetCreateInput): Promise<{
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        url: string;
+        filename: string;
+        originalName: string;
+        mimeType: string;
+        size: number;
+        altText: string | null;
+        metadata: Prisma.JsonValue | null;
+    }>;
+    findById(id: string): Promise<({
+        siteMedia: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        url: string;
+        filename: string;
+        originalName: string;
+        mimeType: string;
+        size: number;
+        altText: string | null;
+        metadata: Prisma.JsonValue | null;
+    }) | null>;
+    findByFilename(filename: string): Promise<({
+        siteMedia: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        url: string;
+        filename: string;
+        originalName: string;
+        mimeType: string;
+        size: number;
+        altText: string | null;
+        metadata: Prisma.JsonValue | null;
+    }) | null>;
+    findAll(options?: {
+        mimeType?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        siteMedia: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        url: string;
+        filename: string;
+        originalName: string;
+        mimeType: string;
+        size: number;
+        altText: string | null;
+        metadata: Prisma.JsonValue | null;
+    })[]>;
+    update(id: string, data: Prisma.MediaAssetUpdateInput): Promise<{
+        siteMedia: ({
+            site: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                domain: string;
+                logoUrl: string | null;
+                primaryColor: string | null;
+                secondaryColor: string | null;
+                nicheType: string;
+                customNicheId: string | null;
+                nicheKeywords: Prisma.JsonValue | null;
+                targetAudience: string | null;
+                siteTitle: string | null;
+                siteDescription: string | null;
+                heroTitle: string | null;
+                heroSubtitle: string | null;
+                aboutTitle: string | null;
+                aboutDescription: string | null;
+                contactEmail: string | null;
+                metaTitle: string | null;
+                metaDescription: string | null;
+                metaKeywords: string | null;
+                featuredPostsTitle: string | null;
+                featuredPostsSubtitle: string | null;
+                featuredProductsTitle: string | null;
+                featuredProductsSubtitle: string | null;
+                newsletterTitle: string | null;
+                newsletterSubtitle: string | null;
+                autoBlogEnabled: boolean;
+                autoBlogFrequency: string | null;
+                autoBlogPostTypes: Prisma.JsonValue | null;
+                autoBlogCategories: Prisma.JsonValue | null;
+                footerText: string | null;
+                socialLinks: Prisma.JsonValue | null;
+            };
+            content: {
+                status: string;
+                data: Prisma.JsonValue;
+                id: string;
+                title: string;
+                slug: string;
+                contentTypeId: number;
+                createdBy: string | null;
+                updatedBy: string | null;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                version: number | null;
+                scheduledPublishAt: Date | null;
+            };
+        } & {
+            contentId: string;
+            siteId: string;
+            mediaAssetId: string;
+        })[];
+    } & {
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        url: string;
+        filename: string;
+        originalName: string;
+        mimeType: string;
+        size: number;
+        altText: string | null;
+        metadata: Prisma.JsonValue | null;
+    }>;
+    delete(id: string): Promise<{
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        url: string;
+        filename: string;
+        originalName: string;
+        mimeType: string;
+        size: number;
+        altText: string | null;
+        metadata: Prisma.JsonValue | null;
+    }>;
+};
+export declare const merchantService: {
+    create(data: Prisma.MerchantCreateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        logoUrl: string | null;
+        website: string | null;
+    }>;
+    findById(id: string): Promise<({
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        logoUrl: string | null;
+        website: string | null;
+    }) | null>;
+    findByName(name: string): Promise<({
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        logoUrl: string | null;
+        website: string | null;
+    }) | null>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        logoUrl: string | null;
+        website: string | null;
+    })[]>;
+    update(id: string, data: Prisma.MerchantUpdateInput): Promise<{
+        affiliateLinks: {
+            status: string;
+            name: string;
+            id: string;
+            createdBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            siteId: string;
+            originalUrl: string;
+            affiliateUrl: string;
+            productId: string | null;
+            merchantId: string | null;
+            displayText: string | null;
+            trackingId: string | null;
+            commissionInfo: Prisma.JsonValue | null;
+            expirationDate: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        logoUrl: string | null;
+        website: string | null;
+    }>;
+    delete(id: string): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        logoUrl: string | null;
+        website: string | null;
+    }>;
+};
+export declare const auditService: {
+    log(data: Prisma.AuditLogCreateInput): Promise<{
+        id: string;
+        createdAt: Date | null;
+        userId: string | null;
+        action: string;
+        tableName: string;
+        recordId: string;
+        oldValues: Prisma.JsonValue | null;
+        newValues: Prisma.JsonValue | null;
+    }>;
+    findByUserId(userId: string, options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        id: string;
+        createdAt: Date | null;
+        userId: string | null;
+        action: string;
+        tableName: string;
+        recordId: string;
+        oldValues: Prisma.JsonValue | null;
+        newValues: Prisma.JsonValue | null;
+    }[]>;
+    findByTable(tableName: string, recordId: string, options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        id: string;
+        createdAt: Date | null;
+        userId: string | null;
+        action: string;
+        tableName: string;
+        recordId: string;
+        oldValues: Prisma.JsonValue | null;
+        newValues: Prisma.JsonValue | null;
+    }[]>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        id: string;
+        createdAt: Date | null;
+        userId: string | null;
+        action: string;
+        tableName: string;
+        recordId: string;
+        oldValues: Prisma.JsonValue | null;
+        newValues: Prisma.JsonValue | null;
+    }[]>;
+};
+export declare const recipeService: {
+    create(data: Prisma.RecipeCreateInput): Promise<{
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        tags: Prisma.JsonValue | null;
+        prepTime: number | null;
+        cookTime: number | null;
+        servings: number | null;
+        difficulty: string | null;
+        cuisine: string | null;
+    }>;
+    findById(id: string): Promise<({
+        ingredients: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            order: number;
+            notes: string | null;
+            recipeId: string;
+            amount: Prisma.Decimal;
+            unit: string;
+        }[];
+        instructions: {
+            id: string;
+            createdAt: Date | null;
+            recipeId: string;
+            stepNumber: number;
+            instruction: string;
+            imageUrl: string | null;
+        }[];
+    } & {
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        tags: Prisma.JsonValue | null;
+        prepTime: number | null;
+        cookTime: number | null;
+        servings: number | null;
+        difficulty: string | null;
+        cuisine: string | null;
+    }) | null>;
+    findByTitle(title: string): Promise<({
+        ingredients: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            order: number;
+            notes: string | null;
+            recipeId: string;
+            amount: Prisma.Decimal;
+            unit: string;
+        }[];
+        instructions: {
+            id: string;
+            createdAt: Date | null;
+            recipeId: string;
+            stepNumber: number;
+            instruction: string;
+            imageUrl: string | null;
+        }[];
+    } & {
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        tags: Prisma.JsonValue | null;
+        prepTime: number | null;
+        cookTime: number | null;
+        servings: number | null;
+        difficulty: string | null;
+        cuisine: string | null;
+    }) | null>;
+    findAll(options?: {
+        cuisine?: string;
+        difficulty?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        ingredients: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            order: number;
+            notes: string | null;
+            recipeId: string;
+            amount: Prisma.Decimal;
+            unit: string;
+        }[];
+        instructions: {
+            id: string;
+            createdAt: Date | null;
+            recipeId: string;
+            stepNumber: number;
+            instruction: string;
+            imageUrl: string | null;
+        }[];
+    } & {
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        tags: Prisma.JsonValue | null;
+        prepTime: number | null;
+        cookTime: number | null;
+        servings: number | null;
+        difficulty: string | null;
+        cuisine: string | null;
+    })[]>;
+    update(id: string, data: Prisma.RecipeUpdateInput): Promise<{
+        ingredients: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            order: number;
+            notes: string | null;
+            recipeId: string;
+            amount: Prisma.Decimal;
+            unit: string;
+        }[];
+        instructions: {
+            id: string;
+            createdAt: Date | null;
+            recipeId: string;
+            stepNumber: number;
+            instruction: string;
+            imageUrl: string | null;
+        }[];
+    } & {
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        tags: Prisma.JsonValue | null;
+        prepTime: number | null;
+        cookTime: number | null;
+        servings: number | null;
+        difficulty: string | null;
+        cuisine: string | null;
+    }>;
+    delete(id: string): Promise<{
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        tags: Prisma.JsonValue | null;
+        prepTime: number | null;
+        cookTime: number | null;
+        servings: number | null;
+        difficulty: string | null;
+        cuisine: string | null;
+    }>;
+    addIngredient(data: Prisma.RecipeIngredientCreateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        order: number;
+        notes: string | null;
+        recipeId: string;
+        amount: Prisma.Decimal;
+        unit: string;
+    }>;
+    updateIngredient(id: string, data: Prisma.RecipeIngredientUpdateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        order: number;
+        notes: string | null;
+        recipeId: string;
+        amount: Prisma.Decimal;
+        unit: string;
+    }>;
+    deleteIngredient(id: string): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        order: number;
+        notes: string | null;
+        recipeId: string;
+        amount: Prisma.Decimal;
+        unit: string;
+    }>;
+    addInstruction(data: Prisma.RecipeInstructionCreateInput): Promise<{
+        id: string;
+        createdAt: Date | null;
+        recipeId: string;
+        stepNumber: number;
+        instruction: string;
+        imageUrl: string | null;
+    }>;
+    updateInstruction(id: string, data: Prisma.RecipeInstructionUpdateInput): Promise<{
+        id: string;
+        createdAt: Date | null;
+        recipeId: string;
+        stepNumber: number;
+        instruction: string;
+        imageUrl: string | null;
+    }>;
+    deleteInstruction(id: string): Promise<{
+        id: string;
+        createdAt: Date | null;
+        recipeId: string;
+        stepNumber: number;
+        instruction: string;
+        imageUrl: string | null;
+    }>;
+};
+export declare const aiContentService: {
+    log(data: Prisma.AIContentLogCreateInput): Promise<{
+        status: string;
+        error: string | null;
+        model: string;
+        id: string;
+        createdAt: Date | null;
+        prompt: string;
+        response: string;
+        tokensUsed: number;
+        cost: Prisma.Decimal | null;
+        duration: number | null;
+    }>;
+    findById(id: string): Promise<{
+        status: string;
+        error: string | null;
+        model: string;
+        id: string;
+        createdAt: Date | null;
+        prompt: string;
+        response: string;
+        tokensUsed: number;
+        cost: Prisma.Decimal | null;
+        duration: number | null;
+    } | null>;
+    findByStatus(status: string, options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        status: string;
+        error: string | null;
+        model: string;
+        id: string;
+        createdAt: Date | null;
+        prompt: string;
+        response: string;
+        tokensUsed: number;
+        cost: Prisma.Decimal | null;
+        duration: number | null;
+    }[]>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        status: string;
+        error: string | null;
+        model: string;
+        id: string;
+        createdAt: Date | null;
+        prompt: string;
+        response: string;
+        tokensUsed: number;
+        cost: Prisma.Decimal | null;
+        duration: number | null;
+    }[]>;
+    getStats(): Promise<{
+        totalLogs: number;
+        successfulLogs: number;
+        failedLogs: number;
+        successRate: number;
+        averageDuration: number;
+    }>;
+};
+export declare const notificationService: {
+    create(data: Prisma.RealTimeNotificationCreateInput): Promise<{
+        message: string;
+        type: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        userId: string;
+        isRead: boolean;
+    }>;
+    findById(id: string): Promise<{
+        message: string;
+        type: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        userId: string;
+        isRead: boolean;
+    } | null>;
+    findByUserId(userId: string, options?: {
+        isRead?: boolean;
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        message: string;
+        type: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        userId: string;
+        isRead: boolean;
+    }[]>;
+    markAsRead(id: string): Promise<{
+        message: string;
+        type: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        userId: string;
+        isRead: boolean;
+    }>;
+    markAllAsRead(userId: string): Promise<Prisma.BatchPayload>;
+    delete(id: string): Promise<{
+        message: string;
+        type: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        userId: string;
+        isRead: boolean;
+    }>;
+};
+export declare const contentTypeService: {
+    create(data: Prisma.ContentTypeCreateInput): Promise<{
+        name: string;
+        id: number;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        schema: Prisma.JsonValue | null;
+    }>;
+    findById(id: number): Promise<({
+        content: {
+            status: string;
+            data: Prisma.JsonValue;
+            id: string;
+            title: string;
+            slug: string;
+            contentTypeId: number;
+            createdBy: string | null;
+            updatedBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            version: number | null;
+            scheduledPublishAt: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        schema: Prisma.JsonValue | null;
+    }) | null>;
+    findByName(name: string): Promise<({
+        content: {
+            status: string;
+            data: Prisma.JsonValue;
+            id: string;
+            title: string;
+            slug: string;
+            contentTypeId: number;
+            createdBy: string | null;
+            updatedBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            version: number | null;
+            scheduledPublishAt: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        schema: Prisma.JsonValue | null;
+    }) | null>;
+    findAll(options?: {
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        content: {
+            status: string;
+            data: Prisma.JsonValue;
+            id: string;
+            title: string;
+            slug: string;
+            contentTypeId: number;
+            createdBy: string | null;
+            updatedBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            version: number | null;
+            scheduledPublishAt: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        schema: Prisma.JsonValue | null;
+    })[]>;
+    update(id: number, data: Prisma.ContentTypeUpdateInput): Promise<{
+        content: {
+            status: string;
+            data: Prisma.JsonValue;
+            id: string;
+            title: string;
+            slug: string;
+            contentTypeId: number;
+            createdBy: string | null;
+            updatedBy: string | null;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            version: number | null;
+            scheduledPublishAt: Date | null;
+        }[];
+    } & {
+        name: string;
+        id: number;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        schema: Prisma.JsonValue | null;
+    }>;
+    delete(id: number): Promise<{
+        name: string;
+        id: number;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        schema: Prisma.JsonValue | null;
+    }>;
+};
+export declare const customNicheService: {
+    create(data: Prisma.CustomNicheCreateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        keywords: Prisma.JsonValue | null;
+        isActive: boolean;
+        competitionLevel: string | null;
+        profitabilityScore: number | null;
+    }>;
+    findById(id: string): Promise<({
+        sites: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        keywords: Prisma.JsonValue | null;
+        isActive: boolean;
+        competitionLevel: string | null;
+        profitabilityScore: number | null;
+    }) | null>;
+    findByName(name: string): Promise<({
+        sites: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        keywords: Prisma.JsonValue | null;
+        isActive: boolean;
+        competitionLevel: string | null;
+        profitabilityScore: number | null;
+    }) | null>;
+    findAll(options?: {
+        isActive?: boolean;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        sites: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        keywords: Prisma.JsonValue | null;
+        isActive: boolean;
+        competitionLevel: string | null;
+        profitabilityScore: number | null;
+    })[]>;
+    update(id: string, data: Prisma.CustomNicheUpdateInput): Promise<{
+        sites: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        }[];
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        keywords: Prisma.JsonValue | null;
+        isActive: boolean;
+        competitionLevel: string | null;
+        profitabilityScore: number | null;
+    }>;
+    delete(id: string): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue | null;
+        targetAudience: string | null;
+        keywords: Prisma.JsonValue | null;
+        isActive: boolean;
+        competitionLevel: string | null;
+        profitabilityScore: number | null;
+    }>;
+};
+export declare const autoBlogPostService: {
+    create(data: Prisma.AutoBlogPostCreateInput): Promise<{
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    }>;
+    findById(id: string): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    }) | null>;
+    findBySite(siteId: string, options?: {
+        status?: string;
+        postType?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    })[]>;
+    findAll(options?: {
+        status?: string;
+        postType?: string;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    })[]>;
+    update(id: string, data: Prisma.AutoBlogPostUpdateInput): Promise<{
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    }>;
+    delete(id: string): Promise<{
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    }>;
+    getScheduledPosts(): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        status: string;
+        content: string;
+        id: string;
+        title: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        tags: Prisma.JsonValue | null;
+        siteId: string;
+        category: string | null;
+        summary: string | null;
+        keyTakeaways: Prisma.JsonValue | null;
+        featuredImage: string | null;
+        publishedAt: Date | null;
+        scheduledAt: Date | null;
+        seoData: Prisma.JsonValue | null;
+        postType: string;
+        wordCount: number | null;
+        readingTime: number | null;
+        affiliateLinks: Prisma.JsonValue | null;
+        internalLinks: Prisma.JsonValue | null;
+        externalLinks: Prisma.JsonValue | null;
+        aiProvider: string | null;
+        generationCost: Prisma.Decimal | null;
+    })[]>;
+};
+export declare const contentScheduleService: {
+    create(data: Prisma.ContentScheduleCreateInput): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    }>;
+    findById(id: string): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    }) | null>;
+    findBySite(siteId: string, options?: {
+        isActive?: boolean;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    })[]>;
+    findAll(options?: {
+        isActive?: boolean;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    })[]>;
+    update(id: string, data: Prisma.ContentScheduleUpdateInput): Promise<{
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    }>;
+    delete(id: string): Promise<{
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    }>;
+    getDueSchedules(): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+    } & {
+        name: string;
+        id: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        categories: Prisma.JsonValue;
+        siteId: string;
+        frequency: string;
+        interval: number;
+        postTypes: Prisma.JsonValue;
+        keywords: Prisma.JsonValue;
+        isActive: boolean;
+        lastRunAt: Date | null;
+        nextRunAt: Date | null;
+    })[]>;
+};
+export declare const productCategoryService: {
+    create(data: Prisma.ProductCategoryCreateInput): Promise<{
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    }>;
+    findById(id: string): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        parent: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        } | null;
+        children: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    }) | null>;
+    findBySlug(slug: string): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        parent: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        } | null;
+        children: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    }) | null>;
+    findBySite(siteId: string, options?: {
+        isActive?: boolean;
+        parentId?: string | null;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        parent: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        } | null;
+        children: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    })[]>;
+    findAll(options?: {
+        isActive?: boolean;
+        parentId?: string | null;
+        limit?: number;
+        offset?: number;
+    }): Promise<({
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        parent: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        } | null;
+        children: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    })[]>;
+    update(id: string, data: Prisma.ProductCategoryUpdateInput): Promise<{
+        site: {
+            name: string;
+            id: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            domain: string;
+            logoUrl: string | null;
+            primaryColor: string | null;
+            secondaryColor: string | null;
+            nicheType: string;
+            customNicheId: string | null;
+            nicheKeywords: Prisma.JsonValue | null;
+            targetAudience: string | null;
+            siteTitle: string | null;
+            siteDescription: string | null;
+            heroTitle: string | null;
+            heroSubtitle: string | null;
+            aboutTitle: string | null;
+            aboutDescription: string | null;
+            contactEmail: string | null;
+            metaTitle: string | null;
+            metaDescription: string | null;
+            metaKeywords: string | null;
+            featuredPostsTitle: string | null;
+            featuredPostsSubtitle: string | null;
+            featuredProductsTitle: string | null;
+            featuredProductsSubtitle: string | null;
+            newsletterTitle: string | null;
+            newsletterSubtitle: string | null;
+            autoBlogEnabled: boolean;
+            autoBlogFrequency: string | null;
+            autoBlogPostTypes: Prisma.JsonValue | null;
+            autoBlogCategories: Prisma.JsonValue | null;
+            footerText: string | null;
+            socialLinks: Prisma.JsonValue | null;
+        };
+        parent: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        } | null;
+        children: {
+            name: string;
+            id: string;
+            slug: string;
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            description: string | null;
+            siteId: string;
+            parentId: string | null;
+            isActive: boolean;
+            displayOrder: number;
+            seoTitle: string | null;
+            seoDescription: string | null;
+            seoKeywords: string | null;
+        }[];
+        products: ({
+            product: {
+                name: string;
+                id: string;
+                createdAt: Date | null;
+                updatedAt: Date | null;
+                description: string | null;
+                manufacturer: string | null;
+                basePrice: Prisma.Decimal;
+                mainImageUrl: string | null;
+                specifications: Prisma.JsonValue | null;
+            };
+        } & {
+            createdAt: Date | null;
+            updatedAt: Date | null;
+            categoryId: string | null;
+            siteId: string;
+            productId: string;
+            price: Prisma.Decimal;
+            discount: Prisma.Decimal | null;
+            inStock: boolean;
+        })[];
+    } & {
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    }>;
+    delete(id: string): Promise<{
+        name: string;
+        id: string;
+        slug: string;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+        description: string | null;
+        siteId: string;
+        parentId: string | null;
+        isActive: boolean;
+        displayOrder: number;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        seoKeywords: string | null;
+    }>;
+    getHierarchy(siteId: string): Promise<any[]>;
+};
+export default prisma;
+//# sourceMappingURL=utils.d.ts.map

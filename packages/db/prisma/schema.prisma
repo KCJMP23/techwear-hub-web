@@ -1,0 +1,747 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Content {
+  id                 String            @id @default(uuid()) @db.Uuid
+  title              String
+  slug               String
+  contentTypeId      Int               @map("content_type_id")
+  data               Json
+  status             String            @default("draft")
+  createdBy          String?           @map("created_by") @db.Uuid
+  updatedBy          String?           @map("updated_by") @db.Uuid
+  createdAt          DateTime?         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime?         @default(now()) @map("updated_at") @db.Timestamptz(6)
+  version            Int?              @default(1)
+  scheduledPublishAt DateTime?         @map("scheduled_publish_at") @db.Timestamptz(6)
+  contentType        ContentType       @relation(fields: [contentTypeId], references: [id])
+  categories         ContentCategory[]
+  tags               ContentTag[]
+  versions           ContentVersion[]
+  siteContent        SiteContent[]
+  media              SiteMedia[]
+
+  @@map("content")
+}
+
+model ContentType {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  schema      Json?
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+  content     Content[]
+
+  @@map("content_types")
+}
+
+model Category {
+  id          Int               @id @default(autoincrement())
+  name        String
+  description String?
+  slug        String
+  parentId    Int?              @map("parent_id")
+  createdAt   DateTime?         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime?         @default(now()) @map("updated_at") @db.Timestamptz(6)
+  parent      Category?         @relation("CategoryToCategory", fields: [parentId], references: [id])
+  children    Category[]        @relation("CategoryToCategory")
+  content     ContentCategory[]
+
+  @@map("categories")
+}
+
+model ContentCategory {
+  contentId  String   @map("content_id") @db.Uuid
+  categoryId Int      @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+  content    Content  @relation(fields: [contentId], references: [id])
+
+  @@id([contentId, categoryId])
+  @@map("content_categories")
+}
+
+model Tag {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String?
+  slug        String
+  createdAt   DateTime?    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime?    @default(now()) @map("updated_at") @db.Timestamptz(6)
+  content     ContentTag[]
+
+  @@map("tags")
+}
+
+model ContentTag {
+  contentId String  @map("content_id") @db.Uuid
+  tagId     Int     @map("tag_id")
+  content   Content @relation(fields: [contentId], references: [id])
+  tag       Tag     @relation(fields: [tagId], references: [id])
+
+  @@id([contentId, tagId])
+  @@map("content_tags")
+}
+
+model Site {
+  id                       String               @id @default(uuid()) @db.Uuid
+  name                     String
+  domain                   String
+  logoUrl                  String?              @map("logo_url")
+  primaryColor             String?              @map("primary_color")
+  secondaryColor           String?              @map("secondary_color")
+  nicheType                String               @default("predefined") @map("niche_type")
+  customNicheId            String?              @map("custom_niche_id") @db.Uuid
+  nicheKeywords            Json?                @default("[]") @map("niche_keywords")
+  targetAudience           String?
+  siteTitle                String?              @map("site_title")
+  siteDescription          String?              @map("site_description")
+  heroTitle                String?              @map("hero_title")
+  heroSubtitle             String?              @map("hero_subtitle")
+  aboutTitle               String?              @map("about_title")
+  aboutDescription         String?              @map("about_description")
+  contactEmail             String?              @map("contact_email")
+  metaTitle                String?              @map("meta_title")
+  metaDescription          String?              @map("meta_description")
+  metaKeywords             String?              @map("meta_keywords")
+  featuredPostsTitle       String?              @map("featured_posts_title")
+  featuredPostsSubtitle    String?              @map("featured_posts_subtitle")
+  featuredProductsTitle    String?              @map("featured_products_title")
+  featuredProductsSubtitle String?              @map("featured_products_subtitle")
+  newsletterTitle          String?              @map("newsletter_title")
+  newsletterSubtitle       String?              @map("newsletter_subtitle")
+  autoBlogEnabled          Boolean              @default(false) @map("auto_blog_enabled")
+  autoBlogFrequency        String?              @map("auto_blog_frequency")
+  autoBlogPostTypes        Json?                @default("[]") @map("auto_blog_post_types")
+  autoBlogCategories       Json?                @default("[]") @map("auto_blog_categories")
+  footerText               String?              @map("footer_text")
+  socialLinks              Json?                @map("social_links")
+  createdAt                DateTime?            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                DateTime?            @default(now()) @map("updated_at") @db.Timestamptz(6)
+  affiliateLinks           AffiliateLink[]
+  autoBlogPosts            AutoBlogPost[]
+  contentSchedules         ContentSchedule[]
+  quizzes                  InteractiveQuiz[]
+  priceAlerts              PriceAlert[]
+  productCategories        ProductCategory[]
+  customFields             ProductCustomField[]
+  content                  SiteContent[]
+  media                    SiteMedia[]
+  products                 SiteProduct[]
+  customNiche              CustomNiche?         @relation(fields: [customNicheId], references: [id])
+
+  @@map("sites")
+}
+
+model SiteContent {
+  siteId    String  @map("site_id") @db.Uuid
+  contentId String  @map("content_id") @db.Uuid
+  content   Content @relation(fields: [contentId], references: [id])
+  site      Site    @relation(fields: [siteId], references: [id])
+
+  @@id([siteId, contentId])
+  @@map("site_content")
+}
+
+model MediaAsset {
+  id           String      @id @default(uuid()) @db.Uuid
+  filename     String
+  originalName String      @map("original_name")
+  mimeType     String      @map("mime_type")
+  size         Int
+  url          String
+  altText      String?     @map("alt_text")
+  metadata     Json?
+  createdAt    DateTime?   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime?   @default(now()) @map("updated_at") @db.Timestamptz(6)
+  siteMedia    SiteMedia[]
+
+  @@map("media_assets")
+}
+
+model SiteMedia {
+  siteId       String     @map("site_id") @db.Uuid
+  contentId    String     @map("content_id") @db.Uuid
+  mediaAssetId String     @map("media_asset_id") @db.Uuid
+  content      Content    @relation(fields: [contentId], references: [id])
+  mediaAsset   MediaAsset @relation(fields: [mediaAssetId], references: [id])
+  site         Site       @relation(fields: [siteId], references: [id])
+
+  @@id([siteId, contentId, mediaAssetId])
+  @@map("site_media")
+}
+
+model Product {
+  id             String                @id @default(uuid()) @db.Uuid
+  name           String
+  description    String?
+  manufacturer   String?
+  basePrice      Decimal               @map("base_price") @db.Decimal(10, 2)
+  mainImageUrl   String?               @map("main_image_url")
+  specifications Json?                 @default("{}")
+  createdAt      DateTime?             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime?             @default(now()) @map("updated_at") @db.Timestamptz(6)
+  affiliateLinks AffiliateLink[]
+  customFields   ProductCustomField[]
+  priceHistory   ProductPriceHistory[]
+  siteProducts   SiteProduct[]
+
+  @@map("products")
+}
+
+model SiteProduct {
+  siteId     String           @map("site_id") @db.Uuid
+  productId  String           @map("product_id") @db.Uuid
+  price      Decimal          @db.Decimal(10, 2)
+  discount   Decimal?         @db.Decimal(5, 2)
+  inStock    Boolean          @default(true) @map("in_stock")
+  createdAt  DateTime?        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime?        @default(now()) @map("updated_at") @db.Timestamptz(6)
+  categoryId String?          @map("category_id") @db.Uuid
+  category   ProductCategory? @relation(fields: [categoryId], references: [id])
+  product    Product          @relation(fields: [productId], references: [id])
+  site       Site             @relation(fields: [siteId], references: [id])
+
+  @@id([siteId, productId])
+  @@map("site_products")
+}
+
+model ProductCustomField {
+  id           String    @id @default(uuid()) @db.Uuid
+  productId    String    @map("product_id") @db.Uuid
+  siteId       String    @map("site_id") @db.Uuid
+  fieldName    String    @map("field_name")
+  fieldType    String    @map("field_type")
+  fieldValue   String    @map("field_value")
+  displayOrder Int       @default(0) @map("display_order")
+  isRequired   Boolean   @default(false) @map("is_required")
+  createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+  product      Product   @relation(fields: [productId], references: [id])
+  site         Site      @relation(fields: [siteId], references: [id])
+
+  @@map("product_custom_fields")
+}
+
+model ProductPriceHistory {
+  id         String    @id @default(uuid()) @db.Uuid
+  productId  String    @map("product_id") @db.Uuid
+  price      Decimal   @db.Decimal(10, 2)
+  currency   String    @default("USD")
+  source     String
+  recordedAt DateTime? @default(now()) @map("recorded_at") @db.Timestamptz(6)
+  product    Product   @relation(fields: [productId], references: [id])
+
+  @@map("product_price_history")
+}
+
+model PriceAlert {
+  id          String    @id @default(uuid()) @db.Uuid
+  siteId      String    @map("site_id") @db.Uuid
+  productId   String    @map("product_id") @db.Uuid
+  alertType   String    @map("alert_type")
+  threshold   Decimal   @db.Decimal(10, 2)
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  triggeredAt DateTime? @map("triggered_at") @db.Timestamptz(6)
+  site        Site      @relation(fields: [siteId], references: [id])
+
+  @@map("price_alerts")
+}
+
+model InteractiveQuiz {
+  id          String         @id @default(uuid()) @db.Uuid
+  siteId      String         @map("site_id") @db.Uuid
+  title       String
+  description String?
+  isActive    Boolean        @default(true) @map("is_active")
+  createdAt   DateTime?      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime?      @default(now()) @map("updated_at") @db.Timestamptz(6)
+  site        Site           @relation(fields: [siteId], references: [id])
+  questions   QuizQuestion[]
+  results     QuizResult[]
+
+  @@map("interactive_quizzes")
+}
+
+model QuizQuestion {
+  id           String               @id @default(uuid()) @db.Uuid
+  quizId       String               @map("quiz_id") @db.Uuid
+  question     String
+  questionType String               @map("question_type")
+  order        Int
+  isRequired   Boolean              @default(false) @map("is_required")
+  createdAt    DateTime?            @default(now()) @map("created_at") @db.Timestamptz(6)
+  answers      QuizAnswer[]
+  options      QuizQuestionOption[]
+  quiz         InteractiveQuiz      @relation(fields: [quizId], references: [id])
+
+  @@map("quiz_questions")
+}
+
+model QuizQuestionOption {
+  id          String       @id @default(uuid()) @db.Uuid
+  questionId  String       @map("question_id") @db.Uuid
+  optionText  String       @map("option_text")
+  optionValue String       @map("option_value")
+  order       Int
+  createdAt   DateTime?    @default(now()) @map("created_at") @db.Timestamptz(6)
+  question    QuizQuestion @relation(fields: [questionId], references: [id])
+
+  @@map("quiz_question_options")
+}
+
+model QuizResult {
+  id              String          @id @default(uuid()) @db.Uuid
+  quizId          String          @map("quiz_id") @db.Uuid
+  sessionId       String          @map("session_id")
+  answers         Json
+  recommendations Json?
+  completedAt     DateTime?       @default(now()) @map("completed_at") @db.Timestamptz(6)
+  quizAnswers     QuizAnswer[]
+  quiz            InteractiveQuiz @relation(fields: [quizId], references: [id])
+
+  @@map("quiz_results")
+}
+
+model QuizAnswer {
+  id         String       @id @default(uuid()) @db.Uuid
+  resultId   String       @map("result_id") @db.Uuid
+  questionId String       @map("question_id") @db.Uuid
+  answer     String
+  createdAt  DateTime?    @default(now()) @map("created_at") @db.Timestamptz(6)
+  question   QuizQuestion @relation(fields: [questionId], references: [id])
+  result     QuizResult   @relation(fields: [resultId], references: [id])
+
+  @@map("quiz_answers")
+}
+
+model AffiliateLink {
+  id             String       @id @default(uuid()) @db.Uuid
+  name           String
+  originalUrl    String       @map("original_url")
+  affiliateUrl   String       @map("affiliate_url")
+  siteId         String       @map("site_id") @db.Uuid
+  createdBy      String?      @map("created_by") @db.Uuid
+  createdAt      DateTime?    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime?    @default(now()) @map("updated_at") @db.Timestamptz(6)
+  productId      String?      @map("product_id") @db.Uuid
+  merchantId     String?      @map("merchant_id") @db.Uuid
+  displayText    String?      @map("display_text")
+  trackingId     String?      @map("tracking_id")
+  status         String       @default("draft")
+  commissionInfo Json?        @default("{}") @map("commission_info")
+  expirationDate DateTime?    @map("expiration_date") @db.Timestamptz(6)
+  merchant       Merchant?    @relation(fields: [merchantId], references: [id])
+  product        Product?     @relation(fields: [productId], references: [id])
+  site           Site         @relation(fields: [siteId], references: [id])
+  conversions    Conversion[]
+  linkClicks     LinkClick[]
+
+  @@map("affiliate_links")
+}
+
+model Merchant {
+  id             String          @id @default(uuid()) @db.Uuid
+  name           String
+  description    String?
+  website        String?
+  logoUrl        String?         @map("logo_url")
+  createdAt      DateTime?       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime?       @default(now()) @map("updated_at") @db.Timestamptz(6)
+  affiliateLinks AffiliateLink[]
+
+  @@map("merchants")
+}
+
+model LinkClick {
+  id               String        @id @default(uuid()) @db.Uuid
+  affiliateLinkId  String        @map("affiliate_link_id") @db.Uuid
+  ipAddress        String?       @map("ip_address")
+  userAgent        String?       @map("user_agent")
+  referrer         String?
+  clickedAt        DateTime?     @default(now()) @map("clicked_at") @db.Timestamptz(6)
+  conversionStatus String?       @default("clicked") @map("conversion_status")
+  conversionValue  Decimal?      @map("conversion_value") @db.Decimal(10, 2)
+  affiliateLink    AffiliateLink @relation(fields: [affiliateLinkId], references: [id])
+
+  @@map("link_clicks")
+}
+
+model Conversion {
+  id              String        @id @default(uuid()) @db.Uuid
+  affiliateLinkId String        @map("affiliate_link_id") @db.Uuid
+  orderId         String?       @map("order_id")
+  orderValue      Decimal       @map("order_value") @db.Decimal(10, 2)
+  commission      Decimal       @db.Decimal(10, 2)
+  currency        String        @default("USD")
+  conversionDate  DateTime?     @default(now()) @map("conversion_date") @db.Timestamptz(6)
+  status          String        @default("pending")
+  notes           String?
+  affiliateLink   AffiliateLink @relation(fields: [affiliateLinkId], references: [id])
+
+  @@map("conversions")
+}
+
+model Role {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String?
+  userRoles   UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  userId String  @map("user_id") @db.Uuid
+  roleId Int     @map("role_id")
+  siteId String? @map("site_id") @db.Uuid
+  role   Role    @relation(fields: [roleId], references: [id])
+
+  @@id([userId, roleId])
+  @@map("user_roles")
+}
+
+model AuditLog {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String?   @map("user_id") @db.Uuid
+  action    String
+  tableName String    @map("table_name")
+  recordId  String    @map("record_id")
+  oldValues Json?     @map("old_values")
+  newValues Json?     @map("new_values")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("audit_logs")
+}
+
+model NewsletterSubscriber {
+  id             String    @id @default(uuid()) @db.Uuid
+  email          String    @unique
+  firstName      String?   @map("first_name")
+  lastName       String?   @map("last_name")
+  isActive       Boolean   @default(true) @map("is_active")
+  subscribedAt   DateTime? @default(now()) @map("subscribed_at") @db.Timestamptz(6)
+  unsubscribedAt DateTime? @map("unsubscribed_at") @db.Timestamptz(6)
+  preferences    Json?     @default("{}")
+  source         String?
+  createdAt      DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("newsletter_subscribers")
+}
+
+model NewsletterCampaign {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  subject    String
+  content    String
+  status     String    @default("draft")
+  sentAt     DateTime? @map("sent_at") @db.Timestamptz(6)
+  sentCount  Int       @default(0) @map("sent_count")
+  openCount  Int       @default(0) @map("open_count")
+  clickCount Int       @default(0) @map("click_count")
+  createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("newsletter_campaigns")
+}
+
+model Newsletter {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("newsletters")
+}
+
+model SocialMediaAccount {
+  id           String    @id @default(uuid()) @db.Uuid
+  platform     String
+  username     String
+  accessToken  String?   @map("access_token")
+  refreshToken String?   @map("refresh_token")
+  isActive     Boolean   @default(true) @map("is_active")
+  createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("social_media_accounts")
+}
+
+model SocialMediaPost {
+  id          String    @id @default(uuid()) @db.Uuid
+  platform    String
+  content     String
+  mediaUrls   Json?     @map("media_urls")
+  status      String    @default("draft")
+  scheduledAt DateTime? @map("scheduled_at") @db.Timestamptz(6)
+  publishedAt DateTime? @map("published_at") @db.Timestamptz(6)
+  engagement  Json?     @default("{}")
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("social_media_posts")
+}
+
+model AffiliateProduct {
+  id             String    @id @default(uuid()) @db.Uuid
+  name           String
+  description    String?
+  price          Decimal   @db.Decimal(10, 2)
+  currency       String    @default("USD")
+  affiliateUrl   String    @map("affiliate_url")
+  merchant       String
+  category       String?
+  tags           Json?
+  images         Json?
+  specifications Json?
+  availability   Boolean   @default(true)
+  rating         Decimal?  @db.Decimal(3, 2)
+  reviewCount    Int?      @map("review_count")
+  createdAt      DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("affiliate_products")
+}
+
+model AffiliateLinkClick {
+  id              String    @id @default(uuid()) @db.Uuid
+  affiliateUrl    String    @map("affiliate_url")
+  ipAddress       String?   @map("ip_address")
+  userAgent       String?   @map("user_agent")
+  referrer        String?
+  clickedAt       DateTime? @default(now()) @map("clicked_at") @db.Timestamptz(6)
+  conversionValue Decimal?  @map("conversion_value") @db.Decimal(10, 2)
+
+  @@map("affiliate_link_clicks")
+}
+
+model Recipe {
+  id           String              @id @default(uuid()) @db.Uuid
+  title        String
+  description  String?
+  prepTime     Int?                @map("prep_time")
+  cookTime     Int?                @map("cook_time")
+  servings     Int?
+  difficulty   String?
+  cuisine      String?
+  tags         Json?
+  createdAt    DateTime?           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime?           @default(now()) @map("updated_at") @db.Timestamptz(6)
+  ingredients  RecipeIngredient[]
+  instructions RecipeInstruction[]
+
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id        String    @id @default(uuid()) @db.Uuid
+  recipeId  String    @map("recipe_id") @db.Uuid
+  name      String
+  amount    Decimal   @db.Decimal(8, 3)
+  unit      String
+  notes     String?
+  order     Int
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  recipe    Recipe    @relation(fields: [recipeId], references: [id])
+
+  @@map("recipe_ingredients")
+}
+
+model RecipeInstruction {
+  id          String    @id @default(uuid()) @db.Uuid
+  recipeId    String    @map("recipe_id") @db.Uuid
+  stepNumber  Int       @map("step_number")
+  instruction String
+  imageUrl    String?   @map("image_url")
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  recipe      Recipe    @relation(fields: [recipeId], references: [id])
+
+  @@map("recipe_instructions")
+}
+
+model ContentVersion {
+  id        String    @id @default(uuid()) @db.Uuid
+  contentId String    @map("content_id") @db.Uuid
+  version   Int
+  data      Json
+  createdBy String?   @map("created_by") @db.Uuid
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  content   Content   @relation(fields: [contentId], references: [id])
+
+  @@map("content_versions")
+}
+
+model RealTimeNotification {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  type      String
+  title     String
+  message   String
+  isRead    Boolean   @default(false) @map("is_read")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("real_time_notifications")
+}
+
+model AIContentLog {
+  id         String    @id @default(uuid()) @db.Uuid
+  prompt     String
+  response   String
+  model      String
+  tokensUsed Int       @map("tokens_used")
+  cost       Decimal?  @db.Decimal(10, 6)
+  duration   Int?
+  status     String
+  error      String?
+  createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("ai_content_logs")
+}
+
+model BulkImport {
+  id            String    @id @default(uuid()) @db.Uuid
+  filename      String
+  status        String    @default("pending")
+  totalRows     Int       @default(0) @map("total_rows")
+  processedRows Int       @default(0) @map("processed_rows")
+  errorRows     Int       @default(0) @map("error_rows")
+  errors        Json?
+  createdAt     DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  completedAt   DateTime? @map("completed_at") @db.Timestamptz(6)
+
+  @@map("bulk_imports")
+}
+
+model MakeWebhook {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String
+  url       String
+  secret    String
+  isActive  Boolean   @default(true) @map("is_active")
+  events    Json?     @default("[]")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("make_webhooks")
+}
+
+model CookieConsent {
+  id          String    @id @default(uuid()) @db.Uuid
+  sessionId   String    @map("session_id")
+  preferences Json      @default("{}")
+  consentedAt DateTime? @default(now()) @map("consented_at") @db.Timestamptz(6)
+
+  @@map("cookie_consents")
+}
+
+model AdSpace {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  location   String
+  adType     String    @map("ad_type")
+  isActive   Boolean   @default(true) @map("is_active")
+  adCode     String?   @map("ad_code")
+  dimensions Json?
+  createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("ad_spaces")
+}
+
+model CustomNiche {
+  id                 String    @id @default(uuid()) @db.Uuid
+  name               String
+  description        String?
+  keywords           Json?     @default("[]")
+  categories         Json?     @default("[]")
+  targetAudience     String?
+  competitionLevel   String?   @map("competition_level")
+  profitabilityScore Int?      @map("profitability_score")
+  isActive           Boolean   @default(true) @map("is_active")
+  createdAt          DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+  sites              Site[]
+
+  @@map("custom_niches")
+}
+
+model AutoBlogPost {
+  id             String    @id @default(uuid()) @db.Uuid
+  siteId         String    @map("site_id") @db.Uuid
+  title          String
+  content        String
+  summary        String?
+  keyTakeaways   Json?     @map("key_takeaways")
+  featuredImage  String?   @map("featured_image")
+  status         String    @default("draft")
+  publishedAt    DateTime? @map("published_at") @db.Timestamptz(6)
+  scheduledAt    DateTime? @map("scheduled_at") @db.Timestamptz(6)
+  seoData        Json?     @default("{}") @map("seo_data")
+  tags           Json?
+  category       String?
+  postType       String    @default("blog_post") @map("post_type")
+  wordCount      Int?      @map("word_count")
+  readingTime    Int?      @map("reading_time")
+  affiliateLinks Json?     @map("affiliate_links")
+  internalLinks  Json?     @map("internal_links")
+  externalLinks  Json?     @map("external_links")
+  aiProvider     String?   @map("ai_provider")
+  generationCost Decimal?  @map("generation_cost") @db.Decimal(10, 6)
+  createdAt      DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+  site           Site      @relation(fields: [siteId], references: [id])
+
+  @@map("auto_blog_posts")
+}
+
+model ContentSchedule {
+  id          String    @id @default(uuid()) @db.Uuid
+  siteId      String    @map("site_id") @db.Uuid
+  name        String
+  description String?
+  frequency   String
+  interval    Int       @default(1)
+  postTypes   Json      @default("[]") @map("post_types")
+  categories  Json      @default("[]")
+  keywords    Json      @default("[]")
+  isActive    Boolean   @default(true) @map("is_active")
+  lastRunAt   DateTime? @map("last_run_at") @db.Timestamptz(6)
+  nextRunAt   DateTime? @map("next_run_at") @db.Timestamptz(6)
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+  site        Site      @relation(fields: [siteId], references: [id])
+
+  @@map("content_schedules")
+}
+
+model ProductCategory {
+  id             String            @id @default(uuid()) @db.Uuid
+  siteId         String            @map("site_id") @db.Uuid
+  name           String
+  description    String?
+  slug           String            @unique
+  parentId       String?           @map("parent_id") @db.Uuid
+  displayOrder   Int               @default(0) @map("display_order")
+  isActive       Boolean           @default(true) @map("is_active")
+  seoTitle       String?           @map("seo_title")
+  seoDescription String?           @map("seo_description")
+  seoKeywords    String?           @map("seo_keywords")
+  createdAt      DateTime?         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime?         @default(now()) @map("updated_at") @db.Timestamptz(6)
+  parent         ProductCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children       ProductCategory[] @relation("CategoryHierarchy")
+  site           Site              @relation(fields: [siteId], references: [id])
+  products       SiteProduct[]
+
+  @@map("product_categories")
+}

@@ -1,0 +1,50 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "cd ../../packages/db && pnpm build && cd ../../apps/admin && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:e2e": "playwright test",
+    "test:coverage": "jest --coverage",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@affiliate-template/ai": "workspace:*",
+    "@affiliate-template/db": "workspace:*",
+    "@affiliate-template/shared-types": "workspace:*",
+    "@affiliate-template/ui": "workspace:*",
+    "@auth/prisma-adapter": "^1.0.0",
+    "@next/font": "^14.0.0",
+    "@prisma/client": "^6.12.0",
+    "bcryptjs": "^2.4.3",
+    "next": "^15.4.3",
+    "next-auth": "^4.24.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^14.1.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@types/jest": "^29.5.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "playwright": "^1.44.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

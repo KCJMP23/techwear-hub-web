@@ -1,0 +1,10 @@
+{
+  "name": "techwear-hub-admin",
+  "buildCommand": "cd ../.. && pnpm db:generate && cd apps/admin && pnpm build",
+  "installCommand": "cd ../.. && pnpm install",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

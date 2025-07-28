@@ -1,0 +1,322 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apple-Inspired Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Apple Color Palette */
+  --apple-blue: #007AFF;
+  --apple-blue-dark: #0056CC;
+  --apple-green: #34C759;
+  --apple-orange: #FF9500;
+  --apple-red: #FF3B30;
+  --apple-purple: #AF52DE;
+  --apple-pink: #FF2D92;
+  --apple-yellow: #FFCC02;
+  
+  /* Neutral Grays */
+  --apple-gray-50: #F5F5F7;
+  --apple-gray-100: #E5E5E7;
+  --apple-gray-200: #D1D1D6;
+  --apple-gray-300: #C7C7CC;
+  --apple-gray-400: #AEAEB2;
+  --apple-gray-500: #8E8E93;
+  --apple-gray-600: #636366;
+  --apple-gray-700: #48484A;
+  --apple-gray-800: #3A3A3C;
+  --apple-gray-900: #1C1C1E;
+  
+  /* Text Colors */
+  --text-primary: var(--apple-gray-900);
+  --text-secondary: var(--apple-gray-600);
+  --text-light: #ffffff;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--apple-gray-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--apple-gray-900);
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Custom Utilities & Components */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center font-semibold transition-all duration-200;
+}
+
+.btn-primary {
+  @apply text-white;
+  background-color: var(--apple-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--apple-blue-dark);
+}
+
+.btn-secondary {
+  @apply text-gray-800;
+  background-color: var(--apple-gray-200);
+}
+
+.btn-secondary:hover {
+  background-color: var(--apple-gray-300);
+}
+
+.btn-ghost {
+  @apply bg-transparent text-white hover:bg-white/10;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-apple-sm overflow-hidden;
+}
+
+.shadow-apple-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-apple-md {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 4px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-apple-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-apple-xl {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-apple-2xl {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 15px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradients */
+.bg-gradient-apple {
+  background: linear-gradient(135deg, var(--apple-blue), var(--apple-purple));
+}
+
+.bg-gradient-apple-blue {
+  background: linear-gradient(135deg, #007AFF, #0056CC);
+}
+
+/* Optimized Animations - Reduced duration for better performance */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.4s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.4s ease-out forwards;
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+
+/* Admin-specific styles */
+.admin-sidebar {
+  @apply bg-white shadow-apple-lg border-r overflow-y-auto;
+  border-right-color: var(--apple-gray-200);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Responsive layout fixes - Improved overflow handling */
+@media (max-width: 1024px) {
+  main {
+    max-width: 100vw;
+    overflow-x: hidden;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .admin-action-card {
+    margin-right: 0;
+    max-width: 100%;
+  }
+  
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 280px;
+  }
+  
+  .admin-action-card {
+    margin: 0.5rem 0;
+    padding: 1rem;
+  }
+  
+  .container {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
+.admin-header {
+  @apply bg-white shadow-apple-sm border-b;
+  border-bottom-color: var(--apple-gray-200);
+}
+
+.admin-card {
+  @apply bg-white rounded-2xl shadow-apple-sm border hover:shadow-apple-md transition-all duration-200;
+  border-color: var(--apple-gray-100);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.admin-stat-card {
+  @apply bg-white rounded-2xl shadow-apple-sm p-6 hover:shadow-apple-md transition-all duration-200;
+  max-width: 100%;
+}
+
+.admin-action-card {
+  @apply bg-white rounded-2xl shadow-apple-sm p-6 hover:shadow-apple-lg transition-all duration-200 border;
+  border-color: var(--apple-gray-100);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.admin-nav-link {
+  @apply flex items-center px-4 py-3 rounded-xl transition-all duration-150;
+  color: var(--apple-gray-700);
+}
+
+.admin-nav-link:hover {
+  color: var(--apple-blue);
+  background-color: rgb(0 122 255 / 0.05);
+}
+
+.admin-nav-link.active {
+  @apply text-white;
+  background-color: var(--apple-blue);
+}
+
+.admin-button {
+  @apply inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 font-semibold rounded-xl transition-all duration-200 text-sm sm:text-base;
+}
+
+.admin-button-primary {
+  @apply text-white shadow-apple-sm hover:shadow-apple-md;
+  background-color: var(--apple-blue);
+}
+
+.admin-button-primary:hover {
+  background-color: var(--apple-blue-dark);
+}
+
+.admin-button-secondary {
+  background-color: var(--apple-gray-100);
+  color: var(--apple-gray-800);
+}
+
+.admin-button-secondary:hover {
+  background-color: var(--apple-gray-200);
+}
+
+.admin-button-success {
+  @apply text-white;
+  background-color: var(--apple-green);
+}
+
+.admin-button-success:hover {
+  opacity: 0.9;
+}
+
+.admin-button-warning {
+  @apply text-white;
+  background-color: var(--apple-orange);
+}
+
+.admin-button-warning:hover {
+  opacity: 0.9;
+}
+
+.admin-button-danger {
+  @apply text-white;
+  background-color: var(--apple-red);
+}
+
+.admin-button-danger:hover {
+  opacity: 0.9;
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Reduce paint operations */
+.admin-card,
+.admin-stat-card,
+.admin-action-card {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Optimize transitions */
+.admin-nav-link,
+.admin-button,
+.admin-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
